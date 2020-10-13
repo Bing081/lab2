@@ -9,14 +9,27 @@ data=droplevels(data)
 summary(data)
 
 #Create histograms (?) of age, fleeing, signs of mental illness
-hist(data$age, col="skyblue", breaks = sqrt(length(data$age)))
 
+# --------------- Probability plot for age ------------- #
+qqnorm(data$age)
+qqline(data$age)
+# ------------------------------------------------------ #
+
+# --------------- Histogram for "Age" ------------------ #
+n = 0:length(data$age)
+y = dnorm(n, mean=mean(data$age), sd=sd(data$age))
+
+plot(n, y, type ='h')
+# ------------------------------------------------------ #
+
+# ------ Histogram for "Signs of mental illness" ------- #
 n = 0:length(data$signs_of_mental_illness)
 x = length(data$signs_of_mental_illness[data$signs_of_mental_illness==TRUE])
-p = length(data$signs_of_mental_illness[data$signs_of_mental_illness==TRUE]) /length(data$signs_of_mental_illness)
+p = x/length(data$signs_of_mental_illness)
 
 y = dbinom(n, size=x, prob = p)
 plot(n, y, type = 'h')
+# ------------------------------------------------------ #
 
 # Question 1
 xbar = mean(data = data$flee)
@@ -29,8 +42,8 @@ l = xbar-z*s/sqrt(n)
 
 
 # Question 2
-phat = length(data$armed[data$armed=="unarmed"])/length(data$armed)
 x = length(data$armed[data$armed=="unarmed"])
+phat = x/length(data$armed)
 n = length(data$armed)
 alpha=0.05
 binom.test(x, n, phat, alternative = "two.sided", conf.level = 1-alpha)
