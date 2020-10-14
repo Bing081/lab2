@@ -79,7 +79,9 @@ binom.test(x, n, p=p, alternative = "greater", conf.level = confidence_level)
 
 # Conclusions
   # There is enough statistical evidence (p > alpha) 
-  # to reject the null-hypothesis (ie p = 0.2)
+  # to reject the null-hypothesis (ie p = 0.2) and to
+  # conclude that the probability of mental illness is
+  # higher than 20% based on this sample.
 
 # --------------------------------------- Question 4 ---------------------------------------- #
 
