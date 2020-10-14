@@ -16,7 +16,9 @@ qqline(data$age)
 n = 0:length(data$age)
 y = dnorm(n, mean=mean(data$age), sd=sd(data$age))
 
+jpeg(file = "age_distribution.jpeg")
 plot(n, y, type ='h')
+dev.off()
 
 # Histogram for 'signs of mental illness'
 n = 0:length(data$signs_of_mental_illness)
@@ -24,7 +26,9 @@ x = length(data$signs_of_mental_illness[data$signs_of_mental_illness==TRUE])
 p = x/length(data$signs_of_mental_illness)
 
 y = dbinom(n, size=x, prob = p)
+jpeg(file = "mental_illness_distribution.jpeg")
 plot(n, y, type = 'h')
+dev.off()
 
 # Histogram for 'armed'
 
