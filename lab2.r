@@ -56,6 +56,9 @@ x = length(data$armed[data$armed=="unarmed"])
 phat = x/length(data$armed)
 n = length(data$armed)
 alpha=0.05
+z = qnorm(alpha/2)
+
+CI = phat + c(-1,1)*z*sqrt(phat*(1-phat)/n)
 
 # Calculate upper and lower CI
 
