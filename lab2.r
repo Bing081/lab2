@@ -30,7 +30,8 @@ plot(n, y, type = 'h')
 
 # --------------------------------------- Question 1 ---------------------------------------- #
 
-# Initialize 
+# Since we do not know true variance
+# we estimate with sample variance
 xbar = mean(data = data$flee)
 s = sd(data$age)
 n = length(data$age)
