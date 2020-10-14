@@ -56,7 +56,8 @@ x = length(data$armed[data$armed=="unarmed"])
 phat = x/length(data$armed)
 n = length(data$armed)
 alpha=0.05
-binom.test(x, n, phat, alternative = "two.sided", conf.level = 1-alpha)
+
+# Calculate upper and lower CI
 
 # --------------------------------------- Question 3 ---------------------------------------- #
 
@@ -64,13 +65,13 @@ binom.test(x, n, phat, alternative = "two.sided", conf.level = 1-alpha)
 
 # Defining variables and stating assumptions
 # h0: p = 0.2
-p = 0.2
 # h1: p > 0.2
 # test statistics
   # (X - np0)/sqrt(np0(1-p0))  N(0,1)
 # Rejection criteria
   # z0 > z.alpha
 # Calculation
+p = 0.2
 alpha = 0.05
 confidence_level = 1-alpha
 x = length(data$signs_of_mental_illness[data$signs_of_mental_illness==TRUE])
