@@ -67,15 +67,20 @@ binom.test(x, n, phat, alternative = "two.sided", conf.level = 1-alpha)
 p = 0.2
 # h1: p > 0.2
 # test statistics
-  # (phat - np0)/sqrt(p0(1-p0)/n) 
+  # (X - np0)/sqrt(np0(1-p0))  N(0,1)
 # Rejection criteria
   # P-value < alpha (significance level)
+  # z0 > za
 # Calculation
 alpha = 0.05
 confidence_level = 1-alpha
 x = length(data$signs_of_mental_illness[data$signs_of_mental_illness==TRUE])
 n = length(data$signs_of_mental_illness)
-binom.test(x, n, p=p, alternative = "greater", conf.level = confidence_level)
+
+z0 = (x-n*p)/sqrt(np*(1-p))
+
+# Not sure if this is correct
+za = qnorm(alpha, lower.tail=FALSE)
 
 # Conclusions
   # There is enough statistical evidence (p > alpha) 
