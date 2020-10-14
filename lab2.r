@@ -69,7 +69,7 @@ alpha=0.05
 # test statistics
   # (X - np0)/sqrt(np0(1-p0))  N(0,1)
 # Rejection criteria
-  # z0 > z.alpha
+  # z0 > z.alpha or p-value < alpha
 # Calculation
 p = 0.2
 alpha = 0.05
@@ -80,9 +80,8 @@ n = length(data$signs_of_mental_illness)
 z0 = (x-n*p)/sqrt(n*p*(1-p))
 
 # Not sure if this is correct
-z.alpha = qnorm(1-alpha)
+z.alpha = qnorm(alpha)
 z0 > z.alpha
-
 
 # --------------------------------------- Question 4 ---------------------------------------- #
 
