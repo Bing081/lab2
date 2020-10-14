@@ -5,14 +5,16 @@ data=shootings_1[sample(4895, 100, replace=TRUE),]
 
 data=droplevels(data)
 
-# --------------------------------- Summary & Visualisation --------------------------------- #
+# --------------------------------- Summary & Visualization --------------------------------- #
 summary(data)
 
 # Check Normality assumption for 'age'
+jpeg(file="Normality_assumption_age.jpeg")
 qqnorm(data$age)
 qqline(data$age)
+dev.off()
 
-# Histogram for age
+# Histogram for 'age'
 n = 0:length(data$age)
 y = dnorm(n, mean=mean(data$age), sd=sd(data$age))
 
@@ -32,11 +34,15 @@ dev.off()
 
 # Histogram for 'armed'
 
+# Not sure how to do this one. Binomial with unarmed vs armed (gun, knife etc.)?
+
 # --------------------------------------- Question 1 ---------------------------------------- #
 
 # Since we do not know true variance
 # we estimate with sample variance
-xbar = mean(data = data$flee)
+# We have previously shown (line 12-13)
+# that the distribution is normal
+xbar = mean(data$age)
 s = sd(data$age)
 n = length(data$age)
 alpha=0.05
@@ -54,9 +60,28 @@ binom.test(x, n, phat, alternative = "two.sided", conf.level = 1-alpha)
 
 # --------------------------------------- Question 3 ---------------------------------------- #
 
+# All steps of hypothesis testing
+
+# Defining variables and stating assumptions
+# h0: p = 0.2
+p = 0.2
+# h1: p > 0.2
+# test statistics
+  # (phat - np0)/sqrt(p0(1-p0)/n) 
+# Rejection criteria
+  # P-value < alpha (significance level)
+# Calculation
+alpha = 0.05
+confidence_level = 1-alpha
+x = length(data$signs_of_mental_illness[data$signs_of_mental_illness==TRUE])
+n = length(data$signs_of_mental_illness)
+binom.test(x, n, p=p, alternative = "greater", conf.level = confidence_level)
+
+# Conclusions
+  # There is enough statistical evidence (p > alpha) 
+  # to reject the null-hypothesis (ie p = 0.2)
 
 # --------------------------------------- Question 4 ---------------------------------------- #
 
 
-# --------------------------------------- Question 5 ---------------------------------------- #
 
