@@ -69,24 +69,23 @@ p = 0.2
 # test statistics
   # (X - np0)/sqrt(np0(1-p0))  N(0,1)
 # Rejection criteria
-  # P-value < alpha (significance level)
-  # z0 > za
+  # z0 > z.alpha
 # Calculation
 alpha = 0.05
 confidence_level = 1-alpha
 x = length(data$signs_of_mental_illness[data$signs_of_mental_illness==TRUE])
 n = length(data$signs_of_mental_illness)
 
-z0 = (x-n*p)/sqrt(np*(1-p))
+z0 = (x-n*p)/sqrt(n*p*(1-p))
 
 # Not sure if this is correct
-za = qnorm(alpha, lower.tail=FALSE)
+z.alpha = qnorm(1-alpha)
+z0 > z.alpha
+
 
 # Conclusions
-  # There is enough statistical evidence (p > alpha) 
-  # to reject the null-hypothesis (ie p = 0.2) and to
-  # conclude that the probability of mental illness is
-  # higher than 20% based on this sample.
+  # Since z0 is not larger than z.alpha there is not
+  # enough statistical evidence 
 
 # --------------------------------------- Question 4 ---------------------------------------- #
 
