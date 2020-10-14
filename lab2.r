@@ -84,10 +84,6 @@ z.alpha = qnorm(1-alpha)
 z0 > z.alpha
 
 
-# Conclusions
-  # Since z0 is not larger than z.alpha there is not
-  # enough statistical evidence 
-
 # --------------------------------------- Question 4 ---------------------------------------- #
 
 
