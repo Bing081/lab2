@@ -37,14 +37,13 @@ dev.off()
 #Pie-chart for  'signs of mental illness'
 true = length(data$signs_of_mental_illness[data$signs_of_mental_illness==TRUE])
 false = length(data$signs_of_mental_illness[data$signs_of_mental_illness==FALSE])
-pie(c(true,false)) # 
+pie(c(true,false), labels = c("true","false"), main = "Signs of mental illness") 
 
 # Histogram for armed
-hist(as.numeric(data$armed))
+#hist(as.numeric(data$armed))
 # Bar-plot for armed
-tbl = table(data$armed)
-tbl[order(as.numeric(names(tbl)))]
-barplot(tbl)
+
+barplot(table(data$armed), las=2)
 
 
 # --------------------------------------- Question 1 ---------------------------------------- #
@@ -63,12 +62,21 @@ l = xbar-z*s/sqrt(n)
 
 # --------------------------------------- Question 2 ---------------------------------------- #
 
+# Since the population (armed) is binomially
+# distributed (either unarmed or not) and
+# np(1-p) > 5 we can approximate with
+# normal distribution N(np, np(1-p)). Let
+# phat denote the estimator X/n and X/n
+# is distributed N(p, p(1-p)).Let Z denote
+# the standardized variable (phat-p)/sqrt(p(1-p)/n)
+
 x = length(data$armed[data$armed=="unarmed"])
 phat = x/length(data$armed)
 n = length(data$armed)
 alpha=0.05
 z = qnorm(alpha/2)
 
+# Since p is unknown we estimate using phat
 CI = phat + c(-1,1)*z*sqrt(phat*(1-phat)/n)
 
 # Calculate upper and lower CI
