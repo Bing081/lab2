@@ -19,8 +19,10 @@ n = 0:length(data$age)
 y = dnorm(n, mean=mean(data$age), sd=sd(data$age))
 
 jpeg(file = "age_distribution.jpeg")
-plot(n, y, type ='h')
+plot(n, y, type ='h', ylab="Propbability")
 dev.off()
+
+hist(data$age, xlab = "Age", main = "Histogram of age" )
 
 # Histogram for 'signs of mental illness'
 n = 0:length(data$signs_of_mental_illness)
@@ -32,9 +34,18 @@ jpeg(file = "mental_illness_distribution.jpeg")
 plot(n, y, type = 'h')
 dev.off()
 
-# Histogram for 'armed'
+#Pie-chart for  'signs of mental illness'
+true = length(data$signs_of_mental_illness[data$signs_of_mental_illness==TRUE])
+false = length(data$signs_of_mental_illness[data$signs_of_mental_illness==FALSE])
+pie(c(true,false)) # 
 
-# Not sure how to do this one. Binomial with unarmed vs armed (gun, knife etc.)?
+# Histogram for armed
+hist(as.numeric(data$armed))
+# Bar-plot for armed
+tbl = table(data$armed)
+tbl[order(as.numeric(names(tbl)))]
+barplot(tbl)
+
 
 # --------------------------------------- Question 1 ---------------------------------------- #
 
