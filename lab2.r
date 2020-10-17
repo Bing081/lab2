@@ -51,9 +51,11 @@ barplot(table(data$armed), las=2)
 # Since we do not know true variance
 # we estimate with sample variance
 # We have previously shown (line 12-13)
-# that the distribution is normal 
-# and CLT states that if n is large
+# that the distribution is normal for age, 
+# and xbar is also normally distributed
+# N(mu, sigma^2/n) and CLT states that if n is large
 # we can still use normal distribution
+# and substitute sigma with sample sd.
 # Otherwise we would have to use T-distr
 # ie, a t-quantile.
 xbar = mean(data$age)
