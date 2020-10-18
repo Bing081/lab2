@@ -34,17 +34,20 @@ jpeg(file = "mental_illness_distribution.jpeg")
 plot(n, y, type = 'h')
 dev.off()
 
-#Pie-chart for  'signs of mental illness'
+# Pie-chart for 'signs of mental illness'
 true = length(data$signs_of_mental_illness[data$signs_of_mental_illness==TRUE])
 false = length(data$signs_of_mental_illness[data$signs_of_mental_illness==FALSE])
-pie(c(true,false), labels = c("true","false"), main = "Signs of mental illness") 
+pie(c(true,false), labels = c("true","false"), main = "Signs of mental illness, n = 100") 
 
-# Histogram for armed
-#hist(as.numeric(data$armed))
 # Bar-plot for armed
+armed = table(data$armed)
+armed_order = armed[order(armed)]
+barplot(armed_order, las=2)
 
-barplot(table(data$armed), las=2)
-
+# Pie-chart for 'armed'
+unarmed = length(data$armed[data$armed=="unarmed"])
+armed = length(data$armed[data$armed!="unarmed"])
+pie(c(unarmed,armed), labels = c("Unarmed","Armed"), main = "Proportion of unarmed victims, n = 100") 
 
 # --------------------------------------- Question 1 ---------------------------------------- #
 
@@ -77,15 +80,14 @@ l = xbar-z*s/sqrt(n)
 # the standardized variable (phat-p)/sqrt(p(1-p)/n)
 
 x = length(data$armed[data$armed=="unarmed"])
-phat = x/length(data$armed)
 n = length(data$armed)
+phat = x/n
 alpha=0.05
 z = qnorm(alpha/2)
 
 # Since p is unknown we estimate using phat
-CI = phat + c(-1,1)*z*sqrt(phat*(1-phat)/n)
-
 # Calculate upper and lower CI
+CI = phat + c(-1,1)*z*sqrt(phat*(1-phat)/n)
 
 # --------------------------------------- Question 3 ---------------------------------------- #
 
@@ -95,7 +97,7 @@ CI = phat + c(-1,1)*z*sqrt(phat*(1-phat)/n)
 # h0: p = 0.2
 # h1: p > 0.2
 # test statistics
-  # (X - np0)/sqrt(np0(1-p0))  N(0,1)
+  # (phat - p0)/sqrt(p0(1-p0)/n) N(0,1)
 # Rejection criteria
   # z0 > z.alpha or p-value < alpha
 # Calculation
