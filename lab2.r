@@ -97,7 +97,7 @@ CI = phat + c(-1,1)*z*sqrt(phat*(1-phat)/n)
 # h0: p = 0.2
 # h1: p > 0.2
 # test statistics
-  # (phat - p0)/sqrt(p0(1-p0)/n) N(0,1)
+  # (x - n*p0)/sqrt(n*p0(1-p0)) N(0,1)
 # Rejection criteria
   # z0 > z.alpha or p-value < alpha
 # Calculation
@@ -106,11 +106,12 @@ alpha = 0.05
 confidence_level = 1-alpha
 x = length(data$signs_of_mental_illness[data$signs_of_mental_illness==TRUE])
 n = length(data$signs_of_mental_illness)
+phat =x/n
 
 z0 = (x-n*p)/sqrt(n*p*(1-p))
 
 # Not sure if this is correct
-z.alpha = qnorm(alpha)
+z.alpha = qnorm(alpha, lower.tail = FALSE)
 z0 > z.alpha
 
 # --------------------------------------- Question 4 ---------------------------------------- #
