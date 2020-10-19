@@ -110,7 +110,6 @@ phat =x/n
 
 z0 = (x-n*p)/sqrt(n*p*(1-p))
 
-# Not sure if this is correct
 z.alpha = qnorm(alpha, lower.tail = FALSE)
 z0 > z.alpha
 
