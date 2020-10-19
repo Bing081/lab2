@@ -53,21 +53,17 @@ pie(c(unarmed,armed), labels = c("Unarmed","Armed"), main = "Proportion of unarm
 
 # Since we do not know true variance
 # we estimate with sample variance
-# We have previously shown (line 12-13)
-# that the distribution is normal for age, 
-# and xbar is also normally distributed
-# N(mu, sigma^2/n) and CLT states that if n is large
-# we can still use normal distribution
-# and substitute sigma with sample sd.
-# Otherwise we would have to use T-distr
-# ie, a t-quantile.
+# Since variance is unkown then we estimate
+# sigma using sample variance and thus
+# the standard random variable follows
+# T-distribution
 xbar = round(mean(data$age), digits = 4)
 s = round(sd(data$age), digits = 4)
 n = length(data$age)
 alpha=0.05
 
-z = round(qnorm(alpha, lower.tail = FALSE), digits = 4)
-l = round(xbar-z*s/sqrt(n), digits = 4)
+t = round(qt(c(0.05), n-1, lower.tail = FALSE), digits = 4)
+l = round(xbar-t*s/sqrt(n), digits = 4)
 
 # --------------------------------------- Question 2 ---------------------------------------- #
 
