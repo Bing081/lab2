@@ -61,13 +61,13 @@ pie(c(unarmed,armed), labels = c("Unarmed","Armed"), main = "Proportion of unarm
 # and substitute sigma with sample sd.
 # Otherwise we would have to use T-distr
 # ie, a t-quantile.
-xbar = mean(data$age)
-s = sd(data$age)
+xbar = round(mean(data$age), digits = 4)
+s = round(sd(data$age), digits = 4)
 n = length(data$age)
 alpha=0.05
 
-z = qnorm(alpha, lower.tail = FALSE)
-l = xbar-z*s/sqrt(n)
+z = round(qnorm(alpha, lower.tail = FALSE), digits = 4)
+l = round(xbar-z*s/sqrt(n), digits = 4)
 
 # --------------------------------------- Question 2 ---------------------------------------- #
 
