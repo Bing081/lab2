@@ -4,6 +4,7 @@ set.seed(r)
 data=shootings_1[sample(4895, 100, replace=TRUE),]
 
 data=droplevels(data)
+sample=1:length(data)
 
 # --------------------------------- Summary & Visualization --------------------------------- #
 summary(data)
@@ -35,19 +36,28 @@ plot(n, y, type = 'h')
 dev.off()
 
 # Pie-chart for 'signs of mental illness'
-true = length(data$signs_of_mental_illness[data$signs_of_mental_illness==TRUE])
-false = length(data$signs_of_mental_illness[data$signs_of_mental_illness==FALSE])
-pie(c(true,false), labels = c("true","false"), main = "Signs of mental illness, n = 100") 
+true = length(data$signs_of_mental_illness[data$signs_of_mental_illness=='True'])
+false = length(data$signs_of_mental_illness[data$signs_of_mental_illness=='False'])
+pie(c(true,false), labels = c("true","false"), 
+    main = "Signs of mental illness, n = 100",
+    edges = 200,radius = 1) 
+
+
 
 # Bar-plot for armed
 armed = table(data$armed)
 armed_order = armed[order(armed)]
+Probability_unarmed=dbinom(sample, size=length(data$armed[data$armed=="unarmed"]),
+                           prob=Pro_unarmed)
 barplot(armed_order, las=2)
+
 
 # Pie-chart for 'armed'
 unarmed = length(data$armed[data$armed=="unarmed"])
 armed = length(data$armed[data$armed!="unarmed"])
-pie(c(unarmed,armed), labels = c("Unarmed","Armed"), main = "Proportion of unarmed victims, n = 100") 
+pie(c(unarmed,armed), labels = c("Unarmed","Armed"),
+    main = "Proportion of unarmed victims, n = 100",
+    edges = 200,radius = 1) 
 
 # --------------------------------------- Question 1 ---------------------------------------- #
 
@@ -93,9 +103,9 @@ CI = phat + c(-1,1)*z*sqrt(phat*(1-phat)/n)
 # h0: p = 0.2
 # h1: p > 0.2
 # test statistics
-  # (x - n*p0)/sqrt(n*p0(1-p0)) N(0,1)
+# (x - n*p0)/sqrt(n*p0(1-p0)) N(0,1)
 # Rejection criteria
-  # z0 > z.alpha or p-value < alpha
+# z0 > z.alpha or p-value < alpha
 # Calculation
 p = 0.2
 alpha = 0.05
@@ -110,6 +120,17 @@ z.alpha = qnorm(alpha, lower.tail = FALSE)
 z0 > z.alpha
 
 # --------------------------------------- Question 4 ---------------------------------------- #
+# donet M: the age of the victim
+#       N: the unarmed victim
+#       O: the mentally ill victim
 
+n_total=length(shootings_1$id)
 
+M=shootings_1$age
+u_age=mean(M)
 
+N=shootings_1$armed[shootings_1$armed=="unarmed"]
+P_N=length(N)/n_total
+
+O=shootings_1$signs_of_mental_illness[shootings_1$signs_of_mental_illness=="True"]
+P_O=length(O)/n_total
