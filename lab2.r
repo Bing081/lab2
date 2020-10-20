@@ -24,6 +24,16 @@ dev.off()
 
 hist(data$age, xlab = "Age", main = "Histogram of age" )
 
+# Check the Normality assumption for 'age'
+jpeg(file="Normality_assumption_age.jpeg")
+qqnorm(data$age)
+qqline(data$age)
+dev.off()
+
+jpeg(file = "age_distribution.jpeg")
+plot(n, y, type ='h', ylab="Propbability")
+dev.off()
+
 # Histogram for 'signs of mental illness'
 n = 0:length(data$signs_of_mental_illness)
 x = length(data$signs_of_mental_illness[data$signs_of_mental_illness==TRUE])
